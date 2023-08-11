@@ -1,0 +1,11 @@
+gitSourceBranch = "main"
+
+[docusaurus]
+title = "Signal"
+tagline = "A straightforward signal implementation in Luau"
+
+[home]
+enabled = true
+
+[footer]
+copyright = "Copyright © 2023 Lucas Gangstad. Built with Moonwave and Docusaurus."

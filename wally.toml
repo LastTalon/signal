@@ -1,0 +1,28 @@
+[package]
+name = "lasttalon/signal"
+version = "0.1.0"
+description = "A signal implementation"
+license = "MIT"
+authors = ["Lucas Gangstad <lucas@lasttalon.dev>"]
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+exclude = [
+    "*.spec.lua",
+    "*.dev.lua",
+    "tests",
+    "docs",
+    "aftman.toml",
+    "moonwave.toml",
+    "selene.toml",
+    "stylua.toml",
+    "testez-companion.toml",
+    "sourcemap.json",
+    "test.project.json",
+    "testez.yaml",
+]
+
+[dependencies]
+LinkedList = "lasttalon/linked-list@0.1.0"
+
+[dev-dependencies]
+TestEZ = "roblox/testez@0.4.1"
