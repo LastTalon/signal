@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog][kac], and this project adheres to
 
 ## [Unreleased]
 
+## [0.1.0] - 2023-08-12
+
 ### Added
 
 - `Signal` class for creating and managing signals
@@ -24,3 +26,4 @@ The format is based on [Keep a Changelog][kac], and this project adheres to
   - Checking if callbacks are connected
 
 [unreleased]: https://github.com/lasttalon/signal/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/lasttalon/linked-list/releases/tag/v0.1.0
