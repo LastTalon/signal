@@ -10,7 +10,7 @@ assignees: ""
 
 A clear and concise description of what the problem is or what you would like to
 do differently. If there is a related
-[issue](https://github.com/lasttalon/linked-list/issues), let us know here.
+[issue](https://github.com/lasttalon/signal/issues), let us know here.
 
 ## Proposed solution
 

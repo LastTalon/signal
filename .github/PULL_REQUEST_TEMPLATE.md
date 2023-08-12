@@ -2,13 +2,13 @@
 
 A clear and concise description of what your changes are. Explain to
 maintainers why we should accept your solution. Be sure to adhere to our
-[contribution guidelines](https://github.com/lasttalon/linked-list/blob/main/CONTRIBUTING.md).
+[contribution guidelines](https://github.com/lasttalon/signal/blob/main/CONTRIBUTING.md).
 
 ## Related issues
 
 Explain how this pull request relates to any relevant
-[issues](https://github.com/lasttalon/linked-list/issues). Bugs and
-features should always have related issues.
+[issues](https://github.com/lasttalon/signal/issues). Bugs and features should
+always have related issues.
 
 ## Additional comments
 
