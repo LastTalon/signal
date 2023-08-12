@@ -12,4 +12,15 @@ The format is based on [Keep a Changelog][kac], and this project adheres to
 
 ### Added
 
+- `Signal` class for creating and managing signals
+  - Connecting callbacks to signals
+  - Firing signals
+  - Disconnecting all callbacks from signals
+  - Providing an `Event` object for external use
+- `Event` class for externally connecting to signals
+  - Connecting callbacks to events
+- `Connection` objects for managing callbacks connected to signals/events
+  - Disconnecting callbacks
+  - Checking if callbacks are connected
+
 [unreleased]: https://github.com/lasttalon/signal/compare/v0.1.0...HEAD
