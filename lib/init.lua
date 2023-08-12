@@ -4,6 +4,11 @@ local LinkedList = require(Package.LinkedList)
 --[=[
 	Disconnects this connection.
 
+	```lua
+	local connection = signal:Connect(callback)
+	connection.disconnect()
+	```
+
 	@function disconnect
 	@within Connection
 ]=]
@@ -11,13 +16,22 @@ local LinkedList = require(Package.LinkedList)
 --[=[
 	Checks if this function is currently connected.
 
+	```lua
+	local connection = signal:Connect(callback)
+
+	if connection.isConnected() then
+		print("We are connected!")
+	end
+	```
+
+	@return boolean
+
 	@function isConnected
 	@within Connection
-	@return boolean
 ]=]
 
 --[=[
-	A connection created by an [Event].
+	A connection created by an [Event] or [Signal].
 
 	@class Connection
 ]=]
@@ -30,7 +44,7 @@ export type Connection = {
 	A function called when an Event fires.
 
 	@type Callback (...unknown) -> ()
-	@within Event
+	@within Signal
 ]=]
 export type Callback = (...unknown) -> ()
 
@@ -40,16 +54,17 @@ type Listener = {
 }
 
 --[=[
-	A Signal for firing events.
+	A Signal for firing events to subscribing listeners.
 
 	@class Signal
-	@ignore
 ]=]
 local Signal = {}
 Signal.__index = Signal
 
 --[=[
 	Creates a new Signal.
+
+	@return Signal
 ]=]
 function Signal.new()
 	local signal = setmetatable({}, Signal)
@@ -57,7 +72,9 @@ function Signal.new()
 	--[=[
 		An Event that you can subscribe to.
 
-		This is effectively the subscription end of a Signal.
+		This is effectively the subscription end of a [Signal]. This is primarily
+		used to provide subscription to external consumers of a Signal. For example,
+		you may want to provide a Signal that can be subscribed to, but not fired.
 
 		@class Event
 	]=]
@@ -70,12 +87,47 @@ function Signal.new()
 		The Callback will be called every time this Event fires. It can be
 		disconnected through the returned [Connection].
 
+		```lua
+		signal:Connect(function(event: string)
+			print(event, "was fired!")
+		end)
+		```
+
 		@within Event
 	]=]
 	function Event:Connect(callback: Callback): Connection
 		return signal:Connect(callback)
 	end
 
+	--[=[
+		An Event that you can subscribe that can be provided to external consumers
+		of this signal.
+
+		This allows you to provide a signal that can be subscribed to, but not fired
+		from the outside.
+
+		In our module we can do something like this:
+
+		```lua
+		local myObject = {}
+		myObject.Event = Signal.new().Event
+
+		return myObject
+		```
+
+		Then in another script we can do:
+
+		```lua
+		myObject.Event:Connect(function(event: string)
+			print(event, "was fired!")
+		end)
+		```
+
+		@readonly
+
+		@prop Event Event
+		@within Signal
+	]=]
 	signal.Event = setmetatable({}, Event)
 	signal.listeners = LinkedList.new()
 
@@ -87,6 +139,12 @@ end
 
 	The Callback will be called every time this Signal fires. It can be
 	disconnected through the returned [Connection].
+
+	```lua
+	signal:Connect(function(event: string)
+		print(event, "was fired!")
+	end)
+	```
 ]=]
 function Signal:Connect(callback: Callback): Connection
 	local entry: LinkedList.Entry<unknown>?
@@ -117,7 +175,12 @@ end
 	Fires this Signal.
 
 	Any parameters can be provided that will be passed to any listening
-	[Callback]s.
+	[Callbacks](#Callback).
+
+	```lua
+	-- Fire the Signal and pass a string to any listeners
+	signal:Fire("Our event")
+	```
 ]=]
 function Signal:Fire(...: unknown)
 	for listener in self.listeners do

@@ -1,4 +1,5 @@
 gitSourceBranch = "main"
+classOrder = ["Signal"]
 
 [docusaurus]
 title = "Signal"
